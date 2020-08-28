@@ -1,0 +1,7 @@
+{
+  "name": "Comprobantes - Destapaciones Navarro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
