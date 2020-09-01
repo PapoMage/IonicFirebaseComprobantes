@@ -1,17 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Generar nuevo comprobante
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+   
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Generar nuevo comprobante</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- List of Input Items -->
+  <form class="container" [formGroup]="comprobanteForm">
+<ion-list>
+  <ion-item lines="full">
+    <ion-label position="floating">Nombre, Apellido</ion-label>
+    <ion-input type="text" formControlName="nombre" required></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label position="floating">Domicilio</ion-label>
+    <ion-input type="text" formControlName="domicilio" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Tipo de Trabajo</ion-label>
+    <ion-select formControlName="tipoTrabajo">
+      <ion-select-option value="cocina">Cocina</ion-select-option>
+      <ion-select-option value="baño">Baño</ion-select-option>
+      <ion-select-option value="cloaca">Cloaca</ion-select-option>
+      <ion-select-option value="lavadero">Lavadero</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descripción del trabajo</ion-label>
+    <ion-input type="text" formControlName="descripcionTrabajo" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Importe $</ion-label>
+    <ion-input type="number" formControlName="importe" required></ion-input>
+  </ion-item>
+
+</ion-list>
+<div style="padding-left: 5px;">
+  <ion-button size="small" padding-end color="warning" (click)="reiniciarFirma()">Limpiar firma</ion-button>
+  <ion-input formControlName="firma"><canvas class="signature-pad-canvas"  #canvas width="600" height="150" style="touch-action: none; background-color: cornsilk; border-color: red; align-items: center;"></canvas></ion-input>
+</div>
+
+
+
+<ion-button shape="round" expand="full" (click)='crear()'>GUARDAR</ion-button>
+</form>
+<!-- <app-explore-container name="Nuevo Comprobante"></app-explore-container>-->
 </ion-content>

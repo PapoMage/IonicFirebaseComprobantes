@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Comprobantes    
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,25 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Lista de Comprobantes</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  
+  <!-- List of Text Items -->
+<ion-list>
+  <!--<ion-searchbar placeholder="Buscar Comprobante" (ionChange)="getItems($event)"></ion-searchbar>-->
+  <ion-item *ngFor="let comprobante of comprobantes">
+   <!-- <img src={{ comprobante.firma }} alt="texto"> -->
+    <ion-label>
+      <h2> {{ comprobante.domicilio }} | <b>{{ comprobante.importe }}</b> </h2>
+      <h3> {{ comprobante.fecha }} </h3>
+      <p> {{ comprobante.descripcionTrabajo }} </p>
+    </ion-label>
+
+  </ion-item>
+</ion-list>
+
+
+  <app-explore-container name="Recibos"></app-explore-container>
 </ion-content>

@@ -1,7 +1,8 @@
 {
   "name": "Comprobantes - Destapaciones Navarro",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
