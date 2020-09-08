@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, RequiredValidator, Validators, FormControl } fr
 import SignaturePad from 'signature_pad';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
-
+import { Camera, CameraOptions  } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -18,9 +18,11 @@ export class Tab2Page implements OnInit{
 
   comprobanteForm: FormGroup;
   signaturePad: SignaturePad;
+  image: any;
   @ViewChild('canvas', { static: true }) signaturePadElement;
-  constructor(private fb:FormBuilder, private db: AngularFireDatabase, public alertController: AlertController,public toastController: ToastController, private router:Router) {}
+  constructor(private fb:FormBuilder, private db: AngularFireDatabase, public alertController: AlertController,public toastController: ToastController, private router:Router, private camera:Camera) {}
   //constructor(private datePicker: DatePicker) { }
+  
 
   ngOnInit(){
     this.comprobanteForm = this.fb.group({
@@ -47,7 +49,6 @@ export class Tab2Page implements OnInit{
       firma : this.signaturePad.toDataURL(),//this.comprobanteForm.controls['firma'].value
       fecha: this.obtenerFecha().toString()
     };
-    
     //console.log(comprobante),
     //console.log(this.comprobanteForm.value);
     //console.log(this.signaturePad.toDataURL());
@@ -68,6 +69,27 @@ export class Tab2Page implements OnInit{
   //console.log(comprobante);
     console.log("Sali de crear");
   }
+
+  tomarFoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA
+     };
+     this.camera.getPicture(options)
+     .then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.image = 'data:image/jpeg;base64,' + imageData;
+      }, (err) => {
+      // Handle error
+      console.log(err);
+      });
+     
+  }
+
 
   reiniciarFirma(){
     this.signaturePad.clear();

@@ -22,7 +22,7 @@ ngOnInit(){
   //console.log(action.payload.val())
 
   let data = action.payload.val()
-  console.log(data);
+  //console.log(data);
   this.comprobantes = [];
   for (let i in data){
     let comprobanteItem = data[i];
@@ -31,9 +31,22 @@ ngOnInit(){
     let rutaFirma = comprobanteItem.firma;
     console.log(rutaFirma);
     this.comprobantes.push(comprobanteItem);
+    //Revierto el orden del array
+    this.comprobantes.reverse();
   }
 });
 
+}
+
+buscar(event){
+  let texto = event.target.value;
+  
+  if(event.target.value.length == 0){
+    this.ngOnInit();
+  } else{
+    this.comprobantes= this.comprobantes.filter( (comprobante) => {return comprobante.domicilio.toLowerCase().indexOf(texto.toLowerCase())> -1} );
+  }
+  
 }
 
 }

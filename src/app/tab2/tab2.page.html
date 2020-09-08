@@ -18,10 +18,6 @@
   <form class="container" [formGroup]="comprobanteForm">
 <ion-list>
   <ion-item lines="full">
-    <ion-label position="floating">Nombre, Apellido</ion-label>
-    <ion-input type="text" formControlName="nombre" required></ion-input>
-  </ion-item>
-  <ion-item lines="full">
     <ion-label position="floating">Domicilio</ion-label>
     <ion-input type="text" formControlName="domicilio" required></ion-input>
   </ion-item>
@@ -38,16 +34,33 @@
     <ion-label position="floating">Descripción del trabajo</ion-label>
     <ion-input type="text" formControlName="descripcionTrabajo" required></ion-input>
   </ion-item>
-  <ion-item>
+  <!--<ion-item>
     <ion-label position="floating">Importe $</ion-label>
     <ion-input type="number" formControlName="importe" required></ion-input>
+  </ion-item>-->
+  <ion-button (click)="tomarFoto()" style="float:right"><ion-icon name="camera"></ion-icon></ion-button>
+  <img *ngIf="image" [src]="image" width="500" height="400" alt="image">
+  
+  
+  <div style="padding-left: 5px;">
+    <ion-button size="small" padding-end color="warning" (click)="reiniciarFirma()">Limpiar firma</ion-button>
+    <ion-input formControlName="firma"><canvas class="signature-pad-canvas"  #canvas width="600" height="150" style="touch-action: none; background-color: cornsilk; border-color: red; align-items: center;"></canvas></ion-input>
+  </div>
+  <ion-item lines="full">
+    <ion-label position="floating">Aclaración</ion-label>
+    <ion-input type="text" formControlName="nombre" required></ion-input>
   </ion-item>
+<ion-item>
+  <ion-checkbox color="primary" style="margin-right: 10px;"></ion-checkbox><p></p>
+  <ion-label> Me encuentro conforme con el servicio brindado</ion-label>
+</ion-item>
+  
 
 </ion-list>
-<div style="padding-left: 5px;">
-  <ion-button size="small" padding-end color="warning" (click)="reiniciarFirma()">Limpiar firma</ion-button>
-  <ion-input formControlName="firma"><canvas class="signature-pad-canvas"  #canvas width="600" height="150" style="touch-action: none; background-color: cornsilk; border-color: red; align-items: center;"></canvas></ion-input>
-</div>
+
+
+
+
 
 
 

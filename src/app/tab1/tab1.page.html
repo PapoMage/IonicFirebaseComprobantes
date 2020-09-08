@@ -16,7 +16,7 @@
   
   <!-- List of Text Items -->
 <ion-list>
-  <!--<ion-searchbar placeholder="Buscar Comprobante" (ionChange)="getItems($event)"></ion-searchbar>-->
+  <ion-searchbar placeholder="Buscar Comprobante" (ionChange)="buscar( $event )"></ion-searchbar>
   <ion-item *ngFor="let comprobante of comprobantes">
    <!-- <img src={{ comprobante.firma }} alt="texto"> -->
     <ion-label>
