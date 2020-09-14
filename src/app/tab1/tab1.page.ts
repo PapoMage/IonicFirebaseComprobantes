@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ModalController } from '@ionic/angular';
+import { ModalComprobanteComponent } from '../modal-comprobante/modal-comprobante.component';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class Tab1Page implements OnInit{
   itemRef: any;
   comprobantes = [];
 
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase, private modalCtrl:ModalController) {}
 
 ngOnInit(){
   this.itemRef = this.db.object('comprobante');
@@ -47,6 +49,27 @@ buscar(event){
     this.comprobantes= this.comprobantes.filter( (comprobante) => {return comprobante.domicilio.toLowerCase().indexOf(texto.toLowerCase())> -1} );
   }
   
+}
+/*
+detalleComprobante(comprobante){
+  console.log(comprobante);
+} */
+
+async detalleComprobante(comprobante){
+  const modal = await this.modalCtrl.create({
+    component: ModalComprobanteComponent,
+    componentProps: {
+      domicilio: comprobante.domicilio, 
+      nombre: comprobante.nombre, 
+      tipoTrabajo: comprobante.tipoTrabajo, 
+      descripcionTrabajo: comprobante.descripcionTrabajo, 
+      importe: comprobante.importe,
+      firma: comprobante.firma,
+      fecha: comprobante.fecha,
+      foto: comprobante.foto  
+  }
+  })
+  await modal.present();
 }
 
 }

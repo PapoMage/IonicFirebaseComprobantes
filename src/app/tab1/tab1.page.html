@@ -17,13 +17,14 @@
   <!-- List of Text Items -->
 <ion-list>
   <ion-searchbar placeholder="Buscar Comprobante" (ionChange)="buscar( $event )"></ion-searchbar>
-  <ion-item *ngFor="let comprobante of comprobantes">
+  <ion-item *ngFor="let comprobante of comprobantes" (click)="detalleComprobante(comprobante)">
    <!-- <img src={{ comprobante.firma }} alt="texto"> -->
     <ion-label>
-      <h2> {{ comprobante.domicilio }} | <b>{{ comprobante.importe }}</b> </h2>
-      <h3> {{ comprobante.fecha }} </h3>
+      <h2> <b>{{ comprobante.domicilio }}</b> </h2>
+      <ion-label slot="end"> {{ comprobante.fecha }} </ion-label>
       <p> {{ comprobante.descripcionTrabajo }} </p>
     </ion-label>
+   
 
   </ion-item>
 </ion-list>

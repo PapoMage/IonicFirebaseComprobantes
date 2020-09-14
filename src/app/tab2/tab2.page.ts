@@ -19,6 +19,7 @@ export class Tab2Page implements OnInit{
   comprobanteForm: FormGroup;
   signaturePad: SignaturePad;
   image: any;
+  foto: any;
   @ViewChild('canvas', { static: true }) signaturePadElement;
   constructor(private fb:FormBuilder, private db: AngularFireDatabase, public alertController: AlertController,public toastController: ToastController, private router:Router, private camera:Camera) {}
   //constructor(private datePicker: DatePicker) { }
@@ -31,7 +32,8 @@ export class Tab2Page implements OnInit{
       tipoTrabajo:[null],
       descripcionTrabajo:[null],
       importe:[null],
-      firma:[null]
+      firma:[null],
+      foto:[null]
     }),
     this.signaturePad = new SignaturePad(this.signaturePadElement.nativeElement);
     //Limpio la firma y seteo un color al lapiz
@@ -47,13 +49,14 @@ export class Tab2Page implements OnInit{
       descripcionTrabajo : this.comprobanteForm.controls['descripcionTrabajo'].value,
       importe : this.comprobanteForm.controls['importe'].value,
       firma : this.signaturePad.toDataURL(),//this.comprobanteForm.controls['firma'].value
-      fecha: this.obtenerFecha().toString()
+      fecha: this.obtenerFecha().toString(),
+      foto: this.image
     };
-    //console.log(comprobante),
+    //console.log(comprobante.foto)
     //console.log(this.comprobanteForm.value);
     //console.log(this.signaturePad.toDataURL());
 //Control de campos  
-  if(comprobante.nombre == null || comprobante.domicilio ==null || comprobante.tipoTrabajo ==null || comprobante.descripcionTrabajo == null || comprobante.importe == null){
+  if(comprobante.nombre == null || comprobante.domicilio ==null || comprobante.tipoTrabajo ==null || comprobante.descripcionTrabajo == null /*|| comprobante.importe == null*/){
     this.completarDatos();
   }else{
     this.db.database.ref('comprobante').push(comprobante);
@@ -72,22 +75,25 @@ export class Tab2Page implements OnInit{
 
   tomarFoto(){
     const options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.CAMERA
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      targetHeight: 500,
+      targetWidth: 500
      };
      this.camera.getPicture(options)
      .then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       this.image = 'data:image/jpeg;base64,' + imageData;
+      //this.foto = this.image;
       }, (err) => {
       // Handle error
       console.log(err);
       });
-     
+      //return this.image;
   }
 
 

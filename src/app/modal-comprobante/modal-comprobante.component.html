@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Comprobante {{domicilio}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-list-header>Datos del domicilio</ion-list-header>
+  <ion-item>
+    <ion-icon name="map" class="datos-padding"></ion-icon>
+    <p>{{domicilio}}</p>    
+  </ion-item>
+  <ion-item>
+    <ion-icon name="person"  class="datos-padding"></ion-icon>
+    <p>{{nombre}}</p>
+  </ion-item>
+  <ion-list-header>Firma del Responsable</ion-list-header>
+  <ion-item>
+    <img *ngIf="firma" [src]="firma" width="600" height="150" alt="image" style="background-color: cornsilk;">
+  </ion-item>
+  <ion-item-divider></ion-item-divider>
+
+  <ion-list-header>Datos del Trabajo</ion-list-header>
+  <ion-item>
+    <ion-icon name="hammer" class="datos-padding"></ion-icon>
+    <ion-label>{{tipoTrabajo}}</ion-label>
+    <p>{{descripcionTrabajo}}</p>
+  </ion-item>
+  
+  <ion-item-divider></ion-item-divider>
+  
+  <ion-item-group>
+  <ion-list-header>Imagenes Adjuntas</ion-list-header>
+    <ion-item>
+    <img *ngIf="foto" [src]="foto" width="500" height="400" alt="image">
+  </ion-item>
+</ion-item-group>
+<ion-item-divider></ion-item-divider>
+<ion-button shape="round" expand="full">GUARDAR COMPROBANTE</ion-button>
+</ion-content>
